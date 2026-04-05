@@ -1,0 +1,15 @@
+{
+    email {$SMTP_USER}
+}
+
+{$SITE_URL} {
+    reverse_proxy localhost:3000
+
+    # Optional: Log to file
+    log {
+        output file /var/log/caddy/brisley.log
+    }
+
+    # Compress responses
+    encode zstd gzip
+}
