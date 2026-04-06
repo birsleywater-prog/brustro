@@ -17,11 +17,18 @@ export function getYoutubeEmbedUrl(url: string): string {
         return `https://www.youtube.com/embed/${id}${params ? "?" + params : ""}`;
     }
 
+    // Handle YouTube Shorts
+    const shortsMatch = url.match(/\/shorts\/([^?&#/]+)/);
+    if (shortsMatch) {
+        const id = shortsMatch[1];
+        const params = url.split("?")[1] || "";
+        return `https://www.youtube.com/embed/${id}${params ? "?" + params : ""}`;
+    }
+
     // Handle regular watch links
     const watchLinkMatch = url.match(/[?&]v=([^?&#/]+)/);
     if (watchLinkMatch) {
         const id = watchLinkMatch[1];
-        // Remove 'v=' from params but keep the rest
         const params = url.split("?")[1]?.split("&").filter(p => !p.startsWith("v=")).join("&") || "";
         return `https://www.youtube.com/embed/${id}${params ? "?" + params : ""}`;
     }
