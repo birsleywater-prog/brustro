@@ -27,10 +27,10 @@
             {#each data.categories as cat}
                 <a
                     href="/products?category={cat.slug}"
-                    class="card group flex overflow-hidden h-48"
+                    class="card group flex flex-col sm:flex-row overflow-hidden h-auto sm:h-48"
                 >
                     <div
-                        class="w-48 bg-gradient-to-br from-water-light to-brand-200 flex items-center justify-center flex-shrink-0"
+                        class="w-full sm:w-48 h-48 sm:h-full bg-gradient-to-br from-water-light to-brand-200 flex items-center justify-center flex-shrink-0"
                     >
                         {#if cat.image}
                             <img
@@ -42,7 +42,7 @@
                             <span class="text-5xl">💧</span>
                         {/if}
                     </div>
-                    <div class="p-8 flex flex-col justify-center">
+                    <div class="p-6 sm:p-8 flex flex-col justify-center">
                         <h2
                             class="font-heading font-bold text-xl text-gray-900 mb-2 group-hover:text-brand-600 transition-colors"
                         >
