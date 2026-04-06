@@ -1,6 +1,9 @@
 <script lang="ts">
     import { enhance } from "$app/forms";
     import type { ActionData, PageData } from "./$types";
+    import { env } from "$env/dynamic/public";
+    import { getYoutubeEmbedUrl } from "$lib/utils/video";
+    const { PUBLIC_ABOUT_YOUTUBE_VIDEO } = env;
 
     export let data: PageData;
     export let form: ActionData;
@@ -170,7 +173,7 @@
                     Section Image
                 </h2>
                 <p class="text-sm text-gray-500 italic">
-                    This image will replace the factory emoji (🏭) on the About
+                    This image will replace the factory emoji (🏭) or the YouTube video (if configured) on the About
                     page.
                 </p>
                 <div class="flex flex-col md:flex-row items-start gap-6 md:gap-8">
@@ -183,6 +186,17 @@
                                 alt="About section"
                                 class="w-full h-full object-cover"
                             />
+                        {:else if PUBLIC_ABOUT_YOUTUBE_VIDEO}
+                            <iframe
+                                width="100%"
+                                height="100%"
+                                src={getYoutubeEmbedUrl(PUBLIC_ABOUT_YOUTUBE_VIDEO)}
+                                title="YouTube video player"
+                                frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                referrerpolicy="strict-origin-when-cross-origin"
+                                allowfullscreen
+                            ></iframe>
                         {:else}
                             <span class="text-4xl">🏭</span>
                         {/if}

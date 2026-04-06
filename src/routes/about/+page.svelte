@@ -1,7 +1,8 @@
 <script lang="ts">
     import SEOHead from "$lib/components/SEOHead.svelte";
     import { env } from "$env/dynamic/public";
-    const { PUBLIC_APP_NAME } = env;
+    const { PUBLIC_APP_NAME, PUBLIC_ABOUT_YOUTUBE_VIDEO } = env;
+    import { getYoutubeEmbedUrl } from "$lib/utils/video";
     import type { PageData } from "./$types";
     export let data: PageData;
     $: about = data.aboutSettings;
@@ -49,6 +50,17 @@
                                 alt="Automated Plant"
                                 class="w-full h-full object-cover"
                             />
+                        {:else if PUBLIC_ABOUT_YOUTUBE_VIDEO}
+                            <iframe
+                                width="100%"
+                                height="100%"
+                                src={getYoutubeEmbedUrl(PUBLIC_ABOUT_YOUTUBE_VIDEO)}
+                                title="YouTube video player"
+                                frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                referrerpolicy="strict-origin-when-cross-origin"
+                                allowfullscreen
+                            ></iframe>
                         {:else}
                             <div class="text-center">
                                 <div class="text-8xl mb-4">🏭</div>
